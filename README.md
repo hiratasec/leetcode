@@ -17,3 +17,9 @@ while(fast != nullptr && slow != nullptr)
 while(fast != nullptr && fast->next != nullptr)
 
 ついでに最初にfastとslowで初期値変わらないのでslowを削除
+
+
+**
+2026/03/25
+STEP1からやりなおした結果、STEP1,STEP2,STEP3すべて同じコードになったため
+レビューの際はSTEP3のみお願いいたします。

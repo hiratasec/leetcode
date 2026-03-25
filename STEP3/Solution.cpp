@@ -3,6 +3,10 @@
 *Time 6:52
 *2026/03/24
 *コメントでの処理や変数の説明どの程度まで詳細に残すか悩んだ。
+*
+*2026/03/25 更新
+*Time 4:12
+*leetcodeでsubmitを行っていなかったため再実装
 */
 
 /**
@@ -17,22 +21,24 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        //nullCheck
+        //headのnullチェック
         if(head == nullptr){
             return false;
-        }    
-        //探索用ポインタ変数に初期値に*headをセット
+        }
         ListNode *fast = head;
         ListNode *slow = head;
 
-        //現在値と次のノードのnullチェック
+        //nullptrになるまで探索
         while(fast != nullptr && fast -> next != nullptr){
+            //更新
+            fast = fast -> next ->next;
+            slow = slow -> next;
+            //Cycle発見
             if(fast == slow){
                 return true;
             }
-            fast = fast -> next -> next;
-            slow = slow -> next;
         }
-        return false;
+        //Cycleなし
+        return  false;
     }
 };

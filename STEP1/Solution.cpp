@@ -9,29 +9,31 @@
 
 /**
 *memo
-*LeetcodeでTime Limit Exceed になったためこのアルゴリズムは不採用
+*LeetcodeでTime Limit Exceed になったためvectorを使ったアルゴリズムは不採用
 *
 */
 
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-                //現在ノード
-        ListNode* current = head;
-        //探索済みノード
-        std::vector<ListNode*> visitedNode;
-        
-        //現在のノードnullptrになるまで探索
-        while(current != nullptr){
-            //探索済みノードと現在ノード比較
-            for(int i = 0; i < visitedNode.size(); i++){
-                //合致したらCycleがtrue判定
-                if(current == visitedNode.at(i)){
-                    return true;
-                }
+        //headのnullチェック
+        if(head == nullptr){
+            return false;
+        }
+        ListNode *fast = head;
+        ListNode *slow = head;
+
+        //nullptrになるまで探索
+        while(fast != nullptr && fast -> next != nullptr){
+            //更新
+            fast = fast -> next ->next;
+            slow = slow -> next;
+            //Cycle発見
+            if(fast == slow){
+                return true;
             }
         }
-        //finish while  サイクル無し
-        return false;
+        //Cycleなし
+        return  false;
     }
 };
