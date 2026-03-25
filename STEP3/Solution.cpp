@@ -1,15 +1,4 @@
 /**
-*STEP3
-*Time 6:52
-*2026/03/24
-*コメントでの処理や変数の説明どの程度まで詳細に残すか悩んだ。
-*
-*2026/03/25 更新
-*Time 4:12
-*leetcodeでsubmitを行っていなかったため再実装
-*/
-
-/**
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -18,27 +7,33 @@
  * };
  */
 
+/**
+*STEP3
+*STEP2よりコメントを整理
+*
+*/
+
 class Solution {
 public:
-    bool hasCycle(ListNode *head) {
-        //headのnullチェック
-        if(head == nullptr){
-            return false;
-        }
+    ListNode *detectCycle(ListNode *head) {
+        if(!head){return nullptr;}
+
         ListNode *fast = head;
         ListNode *slow = head;
-
-        //nullptrになるまで探索
-        while(fast != nullptr && fast -> next != nullptr){
+        //探索
+        while(fast && fast->next){
             //更新
-            fast = fast -> next ->next;
-            slow = slow -> next;
-            //Cycle発見
+            fast = fast->next->next;
+            slow = slow->next;
             if(fast == slow){
-                return true;
+                //fastをheadで初期化
+                fast = head;
+                //Cycle開始位置探索
+                while(fast != slow){
+                    fast = fast->next;
+                    slow = slow->next;
+                } return slow;
             }
-        }
-        //Cycleなし
-        return  false;
+        } return nullptr;
     }
 };
